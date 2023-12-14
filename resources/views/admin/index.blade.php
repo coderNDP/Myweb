@@ -22,7 +22,7 @@
           </a>
         </li>
         <li>
-          <a href="product.php">
+          <a href="{{ route('product.index')}}">
             <i class='bx bx-box' ></i>
             <span class="links_name">Product</span>
           </a>

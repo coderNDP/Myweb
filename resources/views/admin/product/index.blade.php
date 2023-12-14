@@ -33,7 +33,9 @@
             background-clip: padding-box;
             box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
         }
-
+        .pagination{
+            padding-left: 250px;
+        }
         </style>
 </head>
 
@@ -41,7 +43,7 @@
     <link rel="stylesheet" href="/css/button.css">
     <div class="main">
         <h3 style="margin-left: 100px; font-family: 'Times New Roman', Times, serif; font-size: 50px;">Shoes's List</h3>
-        <a href="add_new_product.php" style="text-decoration-line: none;">
+        <a href="{{ route('product.create') }}" style="text-decoration-line: none;">
             <button type="button" class="button_4" style="margin-left: 100px; margin-top: 50px; ">
                 <span class="button_text">Add Item</span>
                 <span class="button_icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
@@ -118,10 +120,11 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!-- <div class="pagination">
+        <div class="pagination">
         {{ $products->links() }}
-    </div> -->
+    </div>
+    </section>
+    
 </body>
 
 </html>
