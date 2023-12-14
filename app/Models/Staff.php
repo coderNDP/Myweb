@@ -12,6 +12,7 @@ class Staff extends Model
         'name',
         'email',
         'status',
+        'email'
      ];
 
 }
