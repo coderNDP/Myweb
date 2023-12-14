@@ -2,12 +2,12 @@
 @section('content')
 
 <style>
-  .menu{
+  body{
     background-image: url(/img/category_bg.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 100%;
-    height: 100%;
+    height: 1000px;
   }
 </style>
 

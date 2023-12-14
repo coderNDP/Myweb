@@ -12,7 +12,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'Desc')->paginate(20);
+        $products = Product::join('brand', 'products.id_brand', '=', 'brand.id')
+    ->join('categories as c1', 'products.id_category', '=', 'c1.id_category')
+    ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
+    ->select(
+        'products.*', 
+        'brand.name_brand', 
+        'c1.name_category as parent', 
+        'c2.name_category as child'
+    )
+    ->orderBy('products.id_product', 'ASC')
+    ->paginate(10);
         return view('admin.product.index', compact('products'));
     }
 
