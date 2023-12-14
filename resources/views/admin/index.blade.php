@@ -1,12 +1,9 @@
-@extends('master.main')
-@section('main')
-<!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
-<html lang="en" dir="ltr">
+<!DOCTYPE html><html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
     <title> Admin </title>
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +11,7 @@
 <body>
 <div class="sidebar">
     <div class="logo-details">
-    <img class="bx bxl" width="60px" height="60px" style=" margin-top:5px;"  src="../img/logo-1.png" alt="">
+    <img class="bx bxl" width="60px" height="60px" style=" margin-top:5px;"  src="/img/logo-1.png" alt="">
     <span class="logo_name">Sport Sneakers</span>
     </div>
       <ul class="nav-links">
@@ -91,8 +88,7 @@
         <i class='bx bx-search' ></i>
       </div>
       <div class="profile-details">
-        <img src="../icon/customer.png" alt="">
-        <span class="admin_name"><?php echo $name ?></span>
+        <img src="/icon/customer.png" alt="">
         <i class='bx bx-chevron-down' ></i>
       </div>
     </nav>

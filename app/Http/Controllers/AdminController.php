@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Staff;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
@@ -17,7 +18,7 @@ class AdminController extends Controller
     }
     public function check_login(){
         request()->validate([
-                'email' => 'required|email|exists:staffs',
+                'email' => 'required|email|exists:users',
                 'password' => 'required'
         ]);
         $data = request()->all('email', 'password');
@@ -30,18 +31,17 @@ class AdminController extends Controller
     public function register(){
         return view('admin.register');
     }
-    public function check_register(){
-        request()->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:staffs',
-            'password' => 'required',
-            'rpt_password' => 'required|same:password'
-    ]);
-        $data = request()->all('email', 'name');
-        $data['password'] = bcrypt(request('password'));
-        dd($data);
-        // Staff::create($data);
-        // return redirect()->route('admin.login');
-        
+    public function check_register(Request $request){
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required',
+        'confirm_password' => 'required|same:password'
+]);
+    $data = $request->except('_token', 'confirm_password');
+    $data['password'] = bcrypt($request->input('password'));
+
+    DB::table('users')->insert($data);
+    return redirect()->route('admin.login');
     }
 }

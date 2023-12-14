@@ -97,14 +97,14 @@
         <form class="form" role="form" action="" method="post">
             @csrf
             <h1 class="heading">Sign up</h1>
-            <input  class="input" name="username" placeholder="Username" type="text">
-            @error('username') <small style="color: red;">{{ $message }}</small> @enderror
+            <input  class="input" name="name" placeholder="Username" type="text">
+            @error('name') <small style="color: red;">{{ $message }}</small> @enderror
             <input  class="input" name="email" placeholder="Email" type="email">
             @error('email') <small style="color: red;">{{ $message }}</small> @enderror
             <input  class="input" name="password" placeholder="Password" type="password">
             @error('password') <small style="color: red;">{{ $message }}</small> @enderror
-            <input  class="input" name="rpt_password" placeholder="Repeat password" type="password">
-            @error('rpt_password') <small style="color: red;">{{ $message }}</small> @enderror
+            <input  class="input" name="confirm_password" placeholder="Repeat password" type="password">
+            @error('confirm_password') <small style="color: red;">{{ $message }}</small> @enderror
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
