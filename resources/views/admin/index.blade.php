@@ -28,7 +28,7 @@
           </a>
         </li>
         <li>
-          <a href="category.php">
+          <a href="{{ route('category.index') }}">
             <i class='bx bx-list-ul' ></i>
             <span class="links_name">Category</span>
           </a>

@@ -293,14 +293,14 @@
       </li>
       <li>
         <div class="iocn-link">
-          <a href="category.php">
+          <a href="{{ route('category.index') }}">
             <i class='bx bx-collection' ></i>
             <span class="link_name">Category</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-          <li><a class="link_name" href="category.php">Category</a></li>
+          <li><a class="link_name" href="{{ route('category.index') }}">Category</a></li>
         </ul>
       </li>
       <li>
@@ -316,12 +316,12 @@
         </ul>
       </li>
       <li>
-        <a href="product.php">
+        <a href="{{ route('product.index') }}">
           <i class='bx bx-box' ></i>
           <span class="link_name">Product</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="product.php">Product</a></li>
+          <li><a class="link_name" href="{{ route('product.index') }}">Product</a></li>
         </ul>
       </li>
       <li>
