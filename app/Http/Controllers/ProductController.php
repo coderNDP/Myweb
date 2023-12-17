@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -12,17 +15,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::join('brand', 'products.id_brand', '=', 'brand.id')
-    ->join('categories as c1', 'products.id_category', '=', 'c1.id_category')
-    ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
-    ->select(
-        'products.*', 
-        'brand.name_brand', 
-        'c1.name_category as parent', 
-        'c2.name_category as child'
-    )
-    ->orderBy('products.id_product', 'ASC')
-    ->paginate(10);
+        $products = Product::join('brands', 'products.id_brand', '=', 'brands.id')
+            ->join('categories as c1', 'products.id_category', '=', 'c1.id_category')
+            ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
+            ->select(
+                'products.*',
+                'brands.name_brand',
+                'c1.name_category as parent',
+                'c2.name_category as child'
+            )
+            ->orderBy('products.id_product', 'ASC')
+            ->paginate(10);
         return view('admin.product.index', compact('products'));
     }
 
@@ -31,7 +34,20 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::join('brands', 'products.id_brand', '=', 'brands.id')
+            ->join('categories as c1', 'products.id_category', '=', 'c1.id_category')
+            ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
+            ->select(
+                'products.*',
+                'brands.name_brand',
+                'c1.name_category as parent',
+                'c2.name_category as child'
+            )
+            ->orderBy('products.id_product', 'ASC')
+            ->paginate(10);
+        $brands = Brand::orderBy('id', 'ASC')->get();
+        $cats = Category::orderBy('id_category', 'ASC')->where('level', 0)->get();
+        return view('admin.product.create', compact('products', 'brands', 'cats'));
     }
 
     /**
@@ -39,7 +55,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->has('file_upload')){
+            $file = $request->file_upload;
+            $file_name = $file->getClientoriginalName();
+            $file->move(public_path('img'), $file_name);
+        }
+        $request->merge(['img' => $file_name]);
+        $request->validate([
+            'name' => 'required|string|unique:products',
+            'img' => 'required',
+            'id_brand' => 'required',
+            'id_category' => 'required',
+            'price' => 'required',
+            'sale_price' => 'required',
+            'Des' => 'required'
+        ]);
+        $data = $request->all('name', 'img', 'id_brand', 'id_category' , 'price', 'sale_price', 'Des');
+        Product::create($data);
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -55,7 +89,21 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $cats = Category::where('level', 0)->get();
+        $brands = Brand::orderBy('id', 'ASC')->get();
+        $category = DB::table('categories as c1')
+            ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
+            ->select('*', 'c2.name_category as child')
+            ->limit(4)
+            ->get();
+        $pro = DB::table('categories as c1')
+        ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
+        ->join('products','products.id_category','=','c2.id_category')
+        ->join('brands', 'products.id_brand', '=', 'brands.id')
+        ->select('products.*', 'brands.name_brand', 'c1.name_category as parent', 'c2.name_category as child')
+        ->where('products.id_product','=',$product->id_product)
+        ->first();
+        return view('admin.product.edit', compact('product', 'cats', 'brands', 'category', 'pro'));
     }
 
     /**
@@ -63,7 +111,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:products,name,' . $product->id_product . ',id_product',
+            'img' => 'required',
+            'id_brand' => 'required',
+            'id_category' => 'required',
+            'price' => 'required',
+            'sale_price' => 'required',
+            'Des' => 'required'
+        ]);
+        $data = $request->all('name', 'img', 'id_brand', 'id_category', 'price', 'sale_price', 'Des');
+        $product->update($data);
+        return redirect()->route('product.index');
     }
 
     /**
@@ -71,6 +130,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index');
     }
 }

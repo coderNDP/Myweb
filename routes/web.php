@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -30,6 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::resources([
         'category' => CategoryController::class,
         'product' => ProductController::class,
+        'brand' => BrandController::class
     ]);
     
 });

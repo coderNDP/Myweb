@@ -16,7 +16,7 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.php" class="active">
+          <a href="{{ route('admin.index') }}" class="active">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
@@ -40,7 +40,7 @@
           </a>
         </li>
         <li>
-          <a href="brand.php">
+          <a href="{{ route('brand.index')}}">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">Brand</span>
           </a>

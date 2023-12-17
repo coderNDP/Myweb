@@ -305,14 +305,14 @@
       </li>
       <li>
         <div class="iocn-link">
-          <a href="brand.php">
+          <a href="{{ route('brand.index') }}">
             <i class='bx bx-coin-stack' ></i>
             <span class="link_name">Brand</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-          <li><a class="link_name" href="brand.php">Brand</a></li>
+          <li><a class="link_name" href="{{ route('brand.index') }}">Brand</a></li>
         </ul>
       </li>
       <li>

@@ -24,7 +24,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $cats = Category::orderBy('id_category', 'ASC')->where('level',0)->paginate(20);
+        return view('admin.category.create', compact('cats'));
     }
 
     /**
@@ -32,7 +33,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_category' => 'required|unique|categories',
+            'id_cha'=> 'required'
+        ]);
+        $data = $request->all('name_category', 'id_cha');
+        Category::insert($data);
+
+        return redirect()->route('category.index');
     }
 
     /**
@@ -48,7 +56,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+       
+
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -56,7 +66,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request -> validate([
+            'name_category' => 'required|unique:categories,name_category,'.$category->id_category.',id_category'
+        ]);
+        $data = $request->all('name_category', 'id_cha');
+        $category->update($data);
+        return redirect()->route('category.index');
     }
 
     /**
@@ -64,6 +79,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('category.index');
     }
 }
