@@ -325,32 +325,32 @@
         </ul>
       </li>
       <li>
-        <a href="staff.php">
+        <a href="{{ route('user.index') }}">
           <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Staff</span>
+          <span class="link_name">User</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="staff.php">Staff</a></li>
+          <li><a class="link_name" href="{{ route('user.index') }}">User</a></li>
         </ul>
       </li>
       </li>
       <li>
-        <a href="customer.php">
+        <a href="{{ route('customer.index') }}">
           <i class='bx bx-user' ></i>
           <span class="link_name">Customer</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="staff.php">Customer</a></li>
+          <li><a class="link_name" href="{{ route('customer.index') }}">Customer</a></li>
         </ul>
       </li>
       </li>
       <li>
-        <a href="order.php">
+        <a href="{{ route('order.index')}}">
           <i class='bx bx-book-alt' ></i>
           <span class="link_name">Total order</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="order.php">Order</a></li>
+          <li><a class="link_name" href="{{ route('order.index')}}">Order</a></li>
         </ul>
       </li>
       </li>

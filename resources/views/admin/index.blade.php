@@ -34,9 +34,9 @@
           </a>
         </li>
         <li>
-          <a href="staff.php">
+          <a href="{{ route('user.index') }}">
             <i class='bx bx-pie-chart-alt-2' ></i>
-            <span class="links_name">Staff</span>
+            <span class="links_name">User</span>
           </a>
         </li>
         <li>
@@ -46,25 +46,25 @@
           </a>
         </li>
         <li>
-          <a href="order.php">
+          <a href="{{ route('order.index') }}">
             <i class='bx bx-book-alt' ></i>
             <span class="links_name">Total order</span>
           </a>
         </li>
         <li>
-          <a href="customer.php">
+          <a href="{{ route('customer.index')}}">
             <i class='bx bx-user' ></i>
             <span class="links_name">Customer</span>
           </a>
         </li>
         <li>
-          <a href="new_admin.php">
+          <a href="">
             <i class='bx bx-cog' ></i>
-            <span class="links_name">Edit Admin</span>
+            <span class="links_name">Setting</span>
           </a>
         </li>
         <li>
-          <a href="upload.php">
+          <a href="">
             <i class='bx bx-upload' ></i>
             <span class="links_name">Upload</span>
           </a>

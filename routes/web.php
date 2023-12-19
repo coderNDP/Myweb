@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +35,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::resources([
         'category' => CategoryController::class,
         'product' => ProductController::class,
-        'brand' => BrandController::class
+        'brand' => BrandController::class,
+        'user' => UserController::class,
+        'customer' => CustomerController::class,
+        'order' => OrderController::class,
     ]);
     
 });
+
