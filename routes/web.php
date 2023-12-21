@@ -7,9 +7,18 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\UserController;
 
 
+=======
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\AdidasController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\NikeController;
+use App\Http\Middleware\Controllers\MenShoeController;
+>>>>>>> Stashed changes
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,10 +29,7 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function(){
-    return view('welcome');
-});
+Route::get('/login', [CustomerController::class, 'login'])->name('login.customer');
 
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [AdminController::class, 'check_login']);
@@ -48,4 +54,40 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     ]);
     
 });
+<<<<<<< Updated upstream
+=======
+Route::get('/customer/index', [CustomerController::class, 'index'])->name('Customer.index');
+
+Route::get('/adidas', 'CustomerController@adidas')->name('customer.adidas');
+Route::group(['prefix' => 'customer'], function(){
+    Route::get('/', [CustomerController::class, 'index'])->name('Customer.adidas');
+    Route::resources([
+        'adidas' => AdidasController::class,
+       
+    ]);
+
+    Route::get('/contact', [CustomerController::class, 'contact'])->name('customer.contact');
+    route::get('/about',[CustomerController::class,'about'])->name('customer.about');
+
+    Route::get('/cap-nhat-thong-tin/{userID}', [CustomerController::class, 'edit'])->name('cap-nhat-thong-tin');
+    Route::post('/cap-nhat-thong-tin/{userID}', [CustomerController::class, 'update']);
+    
+     // Route to display the login form
+    Route::get('/customer/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+
+    // Route to handle the login process
+    Route::post('/login', [LoginController::class, 'login']);
+
+
+    Route::get('/nike', [CustomerController::class, 'index'])->name('customer.nike');
+    Route::group(['prefix' => 'customer'], function(){
+    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/nike')->name('customer.nike');
+});
+    Route::get('/customer/men-shoe')->name('customer.men.shoe');
+});
+
+
+
+>>>>>>> Stashed changes
 

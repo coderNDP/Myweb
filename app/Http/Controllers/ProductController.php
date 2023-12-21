@@ -151,5 +151,26 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.index');
     }
+<<<<<<< Updated upstream
 
+=======
+    
+    public function adidas(Request $request)
+    {
+        $sort = $request->input('sort', 'asc');
+
+        $products = DB::table('product as p')
+            ->select('p.*', 'b.name_brand', 'c.name_category')
+            ->join('brand as b', 'b.id', '=', 'p.id_brand')
+            ->join('category as c', 'c.id_category', '=', 'p.id_category')
+            ->where('b.name_brand', '=', 'Adidas')
+            ->orderBy('p.price', $sort)
+            ->get();
+
+        return view('adidas', compact('products', 'sort'));
+    }
+>>>>>>> Stashed changes
 }
+
+
+

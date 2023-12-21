@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< Updated upstream
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -69,5 +70,63 @@ class CustomerController extends Controller
     {
         $customer->delete();
         return redirect()->route('customer.index');
+=======
+use Illuminate\Http\Request;
+use app\Models\Customer;
+
+class CustomerController extends Controller
+{
+     // Add your controller actions here
+
+     public function index()
+     {
+         return view('customer.index');
+     }
+     public function contact()
+     {
+        return view('customer.contact');
+     }
+     public function about()
+     {
+        return view('customer.about');
+     }
+     public function nike()
+     {
+        return view('customer.nike');
+     }
+     public function login(Request $request)
+    {
+       
+        $customerController = new CustomerController();
+        
+        // Call the check method
+        if ($customerController->check()) {
+            // Your logic here
+        }
+        return view('customer.login');
+    }
+    public function edit($userID)
+    {
+        $customer = Customer::find($userID);
+
+        return view('update_profile', compact('customer'));
+    }
+
+    public function update(Request $request, $userID)
+    {
+        $customer = Customer::find($userID);
+        $customer->username = $request->input('username');
+        $customer->email = $request->input('email');
+        $customer->save();
+
+        return redirect()->route('login'); // Giả sử bạn có một route cho trang đăng nhập
+    }
+    public function menshoe()
+    {
+        $products = \DB::table('products')->get();
+
+        // Trả về view và chuyển dữ liệu đến view
+        return view('men-shoe', ['products' => $products]);
+>>>>>>> Stashed changes
     }
 }
