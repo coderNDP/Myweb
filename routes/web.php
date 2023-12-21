@@ -29,6 +29,12 @@ Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login
 Route::post('/admin/login', [AdminController::class, 'check_login']);
 Route::get('/admin/register', [AdminController::class, 'register'])->name('admin.register');
 Route::post('/admin/register', [AdminController::class, 'check_register']);
+Route::get('/admin/upload', [AdminController::class, 'upload'])->name('admin.upload');
+Route::post('/admin/upload', [AdminController::class, 'check_upload']);
+Route::get('/admin/change_pass', [AdminController::class, 'change_pass'])->name('admin.change_pass');
+Route::post('/admin/change_pass', [AdminController::class, 'check_pass']);
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
     
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');

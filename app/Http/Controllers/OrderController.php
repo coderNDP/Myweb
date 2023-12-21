@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -16,14 +17,14 @@ class OrderController extends Controller
 
         $query = Order::select('orders.*')
             ->join('payments', 'payments.id_payment', '=', 'orders.id_payment');
-    
+
         if ($filter != 5) {
             $query->where('payments.status', $filter);
         }
-    
+
         $result = $query->orderByDesc('orders.updated_time')->get();
-    
-        return view('admin.order.index', ['result' => $result, 'filter' => $filter], compact('result','filter'));
+
+        return view('admin.order.index', ['result' => $result, 'filter' => $filter], compact('result', 'filter'));
     }
 
     /**
@@ -55,7 +56,18 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $order = Order::join('payments as p', 'p.id_payment', '=', 'orders.id_payment')
+            ->where('orders.id', '=', $order->id)
+            ->select('orders.*', 'p.*')
+            ->first();
+        $payment = DB::table('payments')->get();
+        $order_detail = DB::table('order_detail as od')
+            ->join('products as p', 'p.id_product', '=', 'od.id_product')
+            ->join('cart as c', 'c.id_productDT', '=', 'p.id_product')
+            ->where('od.id_order', '=', $order->id)
+            ->select('od.*', 'p.*', 'c.*')
+            ->get();
+        return view('admin.order.edit', compact('order', 'payment', 'order_detail'));
     }
 
     /**

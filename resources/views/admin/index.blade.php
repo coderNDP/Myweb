@@ -58,19 +58,19 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{ route('admin.change_pass') }}">
             <i class='bx bx-cog' ></i>
             <span class="links_name">Setting</span>
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{ route('admin.upload') }}">
             <i class='bx bx-upload' ></i>
             <span class="links_name">Upload</span>
           </a>
         </li>
         <li class="log_out">
-          <a href="logout.php">
+          <a href="{{ route('admin.logout') }}">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>

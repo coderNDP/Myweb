@@ -74,6 +74,7 @@
                                                     <th scope="col">Price</th>
                                                     <th scope="col">Sale_price</th>
                                                     <th scope="col">Description</th>
+                                                    <th>Action</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -110,6 +111,7 @@
                                                             </button></a>
                                                     </div>
                                                 </td>
+                                                <td><a style="color: black;" href="{{ route('product.show', $pro->id_product) }}">View detail</a></td>
                                             </tr>
                                             </tbody>
                                             @endforeach

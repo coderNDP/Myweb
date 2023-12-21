@@ -94,7 +94,7 @@
           <td>{{ $order->name_payment }}</td>
           <td>{{ $status }}</td>
           <td>
-            <a href='order_detail.php?id_order={{ $order->id }}'>View detail</a>
+            <a href="{{ route('order.edit', $order->id) }}">View detail</a>
           </td>
         </tr>
         @endforeach

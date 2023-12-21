@@ -55,7 +55,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->has('file_upload')){
+        if ($request->has('file_upload')) {
             $file = $request->file_upload;
             $file_name = $file->getClientoriginalName();
             $file->move(public_path('img'), $file_name);
@@ -70,7 +70,7 @@ class ProductController extends Controller
             'sale_price' => 'required',
             'Des' => 'required'
         ]);
-        $data = $request->all('name', 'img', 'id_brand', 'id_category' , 'price', 'sale_price', 'Des');
+        $data = $request->all('name', 'img', 'id_brand', 'id_category', 'price', 'sale_price', 'Des');
         Product::create($data);
 
         return redirect()->route('product.index');
@@ -81,7 +81,25 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+         $products = DB::table('categories as c1')
+            ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
+            ->join('products', 'products.id_category', '=', 'c2.id_category')
+            ->join('product_detail', 'product_detail.id_product', '=', 'products.id_product')
+            ->join('brands', 'products.id_brand', '=', 'brands.id')
+            ->join('image', 'image.id_product', '=', 'products.id_product')
+            ->join('size', 'size.id_size', '=', 'product_detail.id_size')
+            ->select('products.*', 'brands.name_brand', 'c1.name_category as parent', 'c2.name_category as child','image.*', 'size.*','product_detail.*')
+            ->where('products.id_product', '=', $product->id_product)
+            ->first();
+            $image = DB::table('image')
+            ->join('products', 'products.id_product', '=', 'image.id_product')
+            ->where('products.id_product', '=', $product->id_product)
+            ->get();
+            
+        
+       
+
+    return view('admin.product.detail', compact('products','image'));
     }
 
     /**
@@ -97,12 +115,12 @@ class ProductController extends Controller
             ->limit(4)
             ->get();
         $pro = DB::table('categories as c1')
-        ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
-        ->join('products','products.id_category','=','c2.id_category')
-        ->join('brands', 'products.id_brand', '=', 'brands.id')
-        ->select('products.*', 'brands.name_brand', 'c1.name_category as parent', 'c2.name_category as child')
-        ->where('products.id_product','=',$product->id_product)
-        ->first();
+            ->leftJoin('categories as c2', 'c2.id_cha', '=', 'c1.id_category')
+            ->join('products', 'products.id_category', '=', 'c2.id_category')
+            ->join('brands', 'products.id_brand', '=', 'brands.id')
+            ->select('products.*', 'brands.name_brand', 'c1.name_category as parent', 'c2.name_category as child')
+            ->where('products.id_product', '=', $product->id_product)
+            ->first();
         return view('admin.product.edit', compact('product', 'cats', 'brands', 'category', 'pro'));
     }
 
@@ -133,4 +151,5 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.index');
     }
+
 }

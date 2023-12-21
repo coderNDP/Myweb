@@ -283,7 +283,7 @@
     </div>
     <ul class="nav-links">
       <li>
-        <a href="index.php">
+        <a href="{{ route('admin.index') }}">
           <i class='bx bx-grid-alt' ></i>
           <span class="link_name">Home</span>
         </a>
@@ -356,34 +356,34 @@
       </li>
       
       <li>
-        <a href="new_admin.php">
+        <a href="{{ route('admin.change_pass') }}">
           <i class='bx bx-cog' ></i>
-          <span class="link_name">Admin</span>
+          <span class="link_name">Setting</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="new_admin.php">Edit Admin</a></li>
+          <li><a class="link_name" href="new_admin.php">Setting</a></li>
         </ul>
       </li>
       </li>
       <div class="iocn-link">
       <li>
       <li>
-        <a href="upload.php">
+        <a href="{{ route('admin.upload') }}">
           <i class='bx bx-upload' ></i>
           <span class="link_name">Upload</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="upload.php">Upload</a></li>
+          <li><a class="link_name" href="{{ route('admin.upload') }}">Upload</a></li>
         </ul>
       </li>
       </li>
       <div class="iocn-link">
       <li>
-      <a href="logout.php"><i class='bx bx-log-out' ></i>
+      <a href="{{ route('admin.logout') }}"><i class='bx bx-log-out' ></i>
       <span class="link_name">Log out</span>
     </a>
     <ul class="sub-menu blank">
-          <li><a class="link_name" href="logout.php">Log out</a></li>
+          <li><a class="link_name" href="{{ route('admin.logout') }}">Log out</a></li>
         </ul>
     </div>
   </li>
